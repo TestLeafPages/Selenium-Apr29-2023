@@ -1,0 +1,135 @@
+Today's Agenda:
+      
+      2:30 - 3:00 -> Absolute xpath
+      3:00 - 4:00 -> Basic Xpath
+      4:00 - 4:30 -> Breakout
+      4:30 - 5:30 -> Advanced Xpath
+      5:30 - 6:00 -> Breakout
+      6:00 - 6:30 -> Advanced Xpath
+      6:30 - 6:45 -> Implicit Wait
+
+ Locators:
+ ==========
+ not to use:
+  id  - alphanumeric characters/dynamic/numbers
+  name - duplicates
+  classname - duplicates/white spaces
+  linkText() - numbers 
+
+ Exception:
+  -NoSuchElementException
+  -InvalidSelectorException 
+
+Xpath:
+  -If none of the locators are available in the tag then go with xpath
+
+  - Absolute Xpath
+    -Starts with /
+    -travel through each node in the DOM
+    -Is not recommended
+  Ex:
+   /html/body/div[2]/div[2]/div/form/p/input
+
+  - Relative Xpath
+     - starts with //
+     - In Xpath index starts with 1.
+
+  - Basic Xpath(5):
+   1.Attribute based Xpath:
+   Syntax:
+    //tagname[@attributename = 'attributevalue']
+   Example:
+    //input[@id = 'password'] 
+    //input[@id='twotabsearchtextbox']
+
+   2.Text Based Xpath: 
+     Syntax:
+      //tagname[text()='textvalue(black color)'] 
+     Example:
+      //a[text()='Leads']
+      //span[text()='Account & Lists'] 
+
+   3.Partial attribute based xpath:
+     Syntax:
+       //tagname[contains(@attributename,'attributevalue')]
+     Example:
+       //input[contains(@class,'Submit')]  
+
+   4.Partial Textbased xpath:
+     Syntax:
+       //tagname[contains(text(),'partialtextvalue')]
+     Example:
+        //a[contains(text(),'SFA')]
+        //span[contains(text(), 'Select')]    
+
+   5.Index based xpath:
+     Syntax:
+        (//tagname[@attributename = 'attributevalue'])[index]
+     Example:
+        (//input[@class='inputLogin'])[2]
+
+  - Advanced Xpath:
+  1. Parent to Child:
+     Syntax:
+     BasicRelativeXpathforParent/childtagname
+     Example:
+     //form[@id='login']/p[2]
+
+  2. Child to Parent:
+     Syntax:
+     BasicRelativexpathforChild/parent::parenttagname
+     Example:
+     //input[@id='password']/parent::p
+
+  3. GrandParent to GrandChild:
+     Syntax:
+     BasicRelativexpathforGrandParent//grandChildtagname
+     Example:
+     (//form[@id='login']//input)[3]
+
+  4. Grandchild to Grandparent:
+     Syntax:
+     BasicRelativexpathforGrandchild/ancestor::Grandparenttagname
+     Example:
+     //input[@id='password']/ancestor::form
+
+  5. ElderCousin to youngerCousin:
+     Syntax:
+     xpathforElderCousin/following::youngercousintagname
+     Example:
+     //span[text()='Company Name']/following::input
+
+  6. YoungerCousin to ElderCousin:
+     Syntax:
+     xpathforyoungerCousin/preceding::eldercousintagname
+     Example:
+     //input[@id='createLeadForm_firstName']/preceding::span[1]
+
+  7. ElderSibling to youngerSibling:
+     Syntax:
+     ElderSiblingXpath/following-sibling::youngersiblingtagname
+     Example:
+     //label[text()='Username']/following-sibling::input
+
+  8. YoungerSibling to ElderSibling:
+     Syntax:
+     youngerSiblingXpath/preceding-sibling::eldersiblingtagname
+     Example:
+     //input[@id='username']/preceding-sibling::label
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
