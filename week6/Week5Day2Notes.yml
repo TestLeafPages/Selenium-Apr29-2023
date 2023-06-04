@@ -1,0 +1,151 @@
+Todays Agenda:
+=============
+  2:30 - 3:30 -> Attributes
+  3:30 - 4:00 -> Classroom
+  4:00 - 4:45 -> Static Parameterization
+  4:45 - 5:00 -> Classroom
+  5:00 - 5:45 -> Dynamic Parameterization
+  5:45 - 6:00 -> Classroom
+  6:00 - 6:30 -> ReadExcel
+
+
+
+Attributes:
+===========
+1.prioirity
+   -Lower priorities will be scheduled first
+   -default value for priority is 0
+
+2.enabled
+   -If you want to ignore a testcase from execution
+   -The status of ignored methods - > index.html->ignored methods
+
+3.invocationCount
+    -default value for invovationCount is 1
+    -The number if times this method is invoked
+    -Use it when you like to create data for same information
+
+4.threadPoolSize
+  
+    The size of the thread pool for this method. The method will be invoked from multiple threads
+    as specified by invocationCount. 
+    Note: this attribute is ignored if invocationCount is not
+    specified
+
+5.timeOut 
+
+    - The maximum number of milliseconds thistest should invoke
+    - Otherwise mark test as failed
+    - Use it when you like to benchmark the performance of test steps
+    - It is for each iteration
+
+6.invocationTimeout
+
+     - The maximum number of milliseconds thistest should take for the cumulated time for all the invocationCounts
+     - This attribute will be ignored if invocationCount is not specified   
+
+7.dependsOnMethods:
+   There are two kinds of dependencies:
+Hard dependencies:
+ - All the methods you depend on must have run and succeeded for you to run. 
+If at least one failure occurred in your dependencies, you will not be invoked and marked as a SKIP in the report.
+Soft dependencies:
+ - You will always be run after the methods you depend on, even if some of them have failed. 
+ This is useful when you just want to make sure that your test methods are run in a certain order but their 
+ success doesn't really depend on the success of others. A soft dependency is obtained by adding "alwaysRun=true" 
+ in your @Test annotation.
+
+7.groups:
+    
+    	For before methods (beforeSuite, beforeTest, beforeTestClass and beforeTestMethod, but not beforeGroups): If set to true, this configuration method will be run 
+      regardless of what groups it belongs to.
+For after methods (afterSuite, afterClass, ...): If set to true, this configuration method will be run even 
+if one or more methods invoked previously failed or was skipped.
+
+   Total 30 testcases
+     -10 testcases - Sanity
+     -5 testcases - Regression
+     -10 testcases - Smoke
+     -5 testcases - Functional  
+
+     CreateLead = Smoke,Regression
+     EditLead = Regression
+     DeleteLead = Smoke
+     MergeLead = Sanity   
+
+ ClassRoom Assignment:
+   1)Run one of the test (CreateLead) 2 times
+   2)Make another test (editLead) depends on othet test (CreateLead)
+      -Confirm CreateLead(first /dependency test) runs first
+      -Confirm the dependent test runs second
+      -Then make the dependency  /first/CreateLead to fail 
+      -Confirm the dependency gets skipped    
+
+
+Parameterization:
+    - No hardcoding of data inside the java class
+    - Preferred to automate them by passing datas from external source (excel,xml)
+
+2 Types:
+
+  -Static (Paramters):
+     It is common across multiple testcases , then you label ->testng.xml
+     Examples:
+       url,username,password
+
+  -Dynamic (DataProvider): 
+      It is specific to the testcase. Cannot reuse most of them -> Excel
+
+      Examples:
+        companyname,firtsname,lastname,phonenumber(Createlead)
+        phonenumber,companyname(EditLead)
+
+
+
+Steps to implement Parameter:
+
+1)Identify the data that are need to be static in the xml (url,usernam,password)
+2)Add parameter tag for each one of these data in the xml file
+3)Map the parameters in the class using @Parameters
+    -Note: The name should exactly match the names in the xml
+4)Use that parameters inside the method using arguments
+    -Note: Sequence matters but  the name of the argument does not matter
+5)Finally replace arguments with hardcoded value
+
+Note: You should always run from the xml file when you use parameters
+
+
+Steps to implement DataProvider:
+
+1)Identify the data that are need to be dynamic for the particular testcase
+        companyname,firtsname,lastname,phonenumber(Createlead)
+        phonenumber,companyname(EditLead)
+2)Create a method sendData  to pass data and annotate with @DataProvider annotation
+3)Create Input array with number of rows and columns
+    -Make sure index starts with 0
+4)Return data back to the calling class
+5)Receive this data in the testcase
+  -Use dataProvider attribute 
+  -Use that arguments inside the method
+6)Finally replace the hardcode value  
+
+
+How to read data from Excel?
+ -Microsoft Excel
+ -Apache Poi (access MS Office software)
+ -Excel extension : xlsx...
+
+ Workbook(FileName with extension  -> CreateLead.xlsx)
+  - WorkSheet(Sheet1,Sheet2)
+     - rows
+        - Columns(Cells)
+
+XSSFWorkBook(only for .xlsx)
+
+Steps:
+1)Open the Workbook using filename and path
+
+
+
+
+
