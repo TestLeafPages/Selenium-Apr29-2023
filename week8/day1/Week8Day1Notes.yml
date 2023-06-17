@@ -1,0 +1,77 @@
+Today's Agenda:
+    - 2:15 - 2:30 -> Live Quiz
+    - 2:30 - 3:30 -> PageObjectModel Introduction
+    - 3:30 - 4:00 -> Sequential Execution 
+    - 4:00 - 4:30 -> Breakout
+    - 4:30 - 5:15 -> Parallel Execution
+    - 5:15 - 5:30 -> Breakout
+    - 5:30 - 6:00 -> Parameterization
+    - 6:00 - 6:30 -> POM with cucumber
+
+
+
+
+    Leaftaps:
+      id = username 
+
+ Steps:
+  1.Create 4 packages
+      a)base
+        -ProjectSpecificMethods
+      b)pages 
+       -LoginPage
+       -WelcomePage
+       -MyHomePage
+       -MyLeadsPage
+       -CreateLeadPage
+       -ViewLeadsPage
+      c)testcases
+        -VerifyLogin 
+      d)utils
+         -ReadExcel   
+
+         
+  2.Create classes for each web page you navigate and all the subclasses in the pages should extend ProjectSpecificMethods
+     -LoginPage(3 methods)
+       - Create methods for each action in a single webpage
+     -WelcomePage(2 methods)
+        -verifyHomePage()
+        -clickcrmsfaLink()
+     -MyHomePage
+     -MyLeadsPage
+     -CreateLeadPage
+     -ViewLeadsPage
+
+  3.All the testcases should extend ProjectSpecificMethods   
+
+  4.Add return statement in each of the methods in each classes respective to the navigation
+     -If a method stays in the samepage
+        return this;
+     -If a methods navigates to another page
+        return new anotherPage();   
+
+  5.For Sequential execution declare driver as static in the ProjectSpecifMethods      
+      
+Steps for Parallel execution:
+ 1.Remove static keyword from 2 global declaration
+ 2.Create parameterized constructor in each pages
+ 3.Pass driver in the parameterized constructor
+ 4.Assign local driver value to the global driver from projectSpecificMethods
+    this.driver=driver
+ 5.Pass driver inside each constructor call in the pages as well as testcasese
+ 6.finally,Run the testcases parallely from testng.xml file
+
+ Parameterization:
+ 1) Create data folder and create excel sheets
+   -Login
+   -CreateLead
+ 2) Create utils package and paste ReadExcel class inside this
+ 3) Create sendData() in the ProjectSpecificMethods and annotate with @DataProvider
+ 4) Call and return ReadExcel.readExcel() from utils package
+ 5) In the testcases create setValues() and annotate with @BeforeTest  and mention excelFilename within the metho
+ 6) With @Test integrate dataProvider attribute
+ 7) In the methodlevel pass all the input arguments for the datas in the excel sheet
+ 8) Replace all the hardcoded values with the arguments
+ 
+ 
+   
